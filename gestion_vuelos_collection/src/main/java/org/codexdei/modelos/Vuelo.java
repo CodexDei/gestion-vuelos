@@ -1,5 +1,7 @@
 package org.codexdei.modelos;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Vuelo {
@@ -8,13 +10,14 @@ public class Vuelo {
     private String origen;
     private String destino;
     private Date fechaHoraLlegada;
-    private Integer cantidadPasajeros;
+    private int cantidadPasajeros;
 
-    public Vuelo(String nombre, String origen, String destino, Date fechaHoraLlegada, Integer cantidadPasajeros) {
+    public Vuelo(String nombre, String origen, String destino, String fechaHoraLlegadaStr, Integer cantidadPasajeros) throws ParseException {
         this.nombre = nombre;
         this.origen = origen;
         this.destino = destino;
-        this.fechaHoraLlegada = fechaHoraLlegada;
+        SimpleDateFormat formatter = new SimpleDateFormat("EEE dd MMM yyyy HH:mm 'hrs'", java.util.Locale.getDefault());
+        this.fechaHoraLlegada = formatter.parse(fechaHoraLlegadaStr);
         this.cantidadPasajeros = cantidadPasajeros;
     }
     public String getNombre(){
@@ -59,10 +62,10 @@ public class Vuelo {
 
     @Override
     public String toString() {
-        return  "Nombre='" + nombre + '\'' +
-                "Origen='" + origen + '\'' +
-                "Destino='" + destino + '\'' +
-                "FechaHoraLlegada=" + fechaHoraLlegada +
-                "CantidadPasajeros=" + cantidadPasajeros;
+        return  "Vuelo=" + nombre + " || " +
+                "Origen=" + origen + " || " +
+                "Destino=" + destino + " || " +
+                "Fecha Llegada=" + fechaHoraLlegada + " || " +
+                "CantidadPasajeros=" + cantidadPasajeros + " \n ";
     }
 }
